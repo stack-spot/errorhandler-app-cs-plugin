@@ -1,0 +1,55 @@
+name: queue-app-cs-plugin
+description: Plug-in para padronizar os retornos de erro das aplicações REST.
+types:
+- app
+
+hooks:
+#package
+  - type: run
+    trigger: before-render
+    commands:
+      - dotnet add src/{{global_inputs.project_name}}.Application package StackSpot.ErrorHandler
+      - dotnet add src/{{global_inputs.project_name}}.Infrastructure package StackSpot.ErrorHandler
+#dependencyinjection
+  - type: edit
+    trigger: before-render
+    path: "src/{{project_name}}.Api/Startup.cs"
+    changes:
+      - search:
+          string: "using"
+          insert-before:
+            value: "using StackSpot.ErrorHandler;"
+          when:
+            not-exists: "using StackSpot.ErrorHandler;"
+      - search:
+          string: "app.UseRouting()"
+          insert-before:
+            value: "app.UseErrorHandler();\n"
+          when:
+            not-exists: "app.UseErrorHandler();"
+#format
+  - type: run
+    trigger: after-render
+    working-dir: src/{{project_name}}.Application
+    commands:
+      -  dotnet dotnet-format --include-generated
+
+displayName: Queue
+
+picture: "plugin.png"
+
+category: backend, queue
+
+compatibility:
+  - net5.0
+  - net6.0
+
+about: about.md
+
+usage: usage.md
+
+useCase: useCase.md
+
+implementation: implementation.md
+
+technologies: [".NET", "C#", "AWS SQS"]

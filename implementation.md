@@ -1,27 +1,8 @@
-# StackSpot ErrorHandler
-
-Este componente foi projetado para padronizar os retornos de erro das aplicações.
-
-### Versões suportadas
-
-- net5.0
-- net6.0
-
-### Uso
-
-#### 1. Adicione o pacote NuGet `StackSpot.ErrorHandler` ao seu projeto.
-
-```
-dotnet add package StackSpot.ErrorHandler
-```
-
-#### 2. Adicione ao seu `IApplicationBuilder` no `Startup` da aplicação ou `Program`. 
+Adicione ao seu `IApplicationBuilder` via `app.UseErrorHandler()` no `Startup` da aplicação ou `Program`. 
 
 ```csharp
 app.UseErrorHandler();
 ```
-
-#### Implementação
 
 #### Exceções tratadas
 
