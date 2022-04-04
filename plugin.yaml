@@ -3,6 +3,9 @@ description: Plug-in para padronizar os retornos de erro das aplicações REST.
 types:
 - app
 
+computedInputs: 
+  "file": "{% if global_inputs.framework == 'net6.0' %}{{'Program.cs'}}{% else %}{{'Startup.cs'}}{% endif %}"
+
 hooks:
 #package
   - type: run
@@ -13,7 +16,7 @@ hooks:
 #dependencyinjection
   - type: edit
     trigger: before-render
-    path: "src/{{project_name}}.Api/Startup.cs"
+    path: "src/{{project_name}}.Api/{{computed_inputs.file}}"
     changes:
       - search:
           string: "using"
