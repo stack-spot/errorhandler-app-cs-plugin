@@ -1,4 +1,4 @@
-name: queue-app-cs-plugin
+name: errorhandler-app-cs-plugin
 description: Plug-in para padronizar os retornos de erro das aplicações REST.
 types:
 - app
@@ -30,15 +30,15 @@ hooks:
 #format
   - type: run
     trigger: after-render
-    working-dir: src/{{project_name}}.Application
+    working-dir: src/{{project_name}}.Api
     commands:
       -  dotnet dotnet-format --include-generated
 
-displayName: Queue
+displayName: ErrorHandler
 
 picture: "plugin.png"
 
-category: backend, queue
+category: Backend, ErrorHandler
 
 compatibility:
   - net5.0
