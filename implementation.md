@@ -33,7 +33,7 @@ Resultado:
 }
 ```
 
-400 - Bad Request - neste caso acima, o log não foi ativado.
+400 - Bad Request - neste caso abaixo, o log não foi ativado.
 
 ```csharp
 throw new HttpResponseException(HttpStatusCode.BadRequest, "Campo Nome é obrigatório", false);
