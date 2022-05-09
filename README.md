@@ -2,41 +2,44 @@
 
 Este componente foi projetado para padronizar os retornos de erro das aplicações.
 
-### Versões suportadas
+**Versões suportadas:**
 
 - net5.0
 - net6.0
 
 ### Uso
 
-#### 1. Adicione o pacote NuGet `StackSpot.ErrorHandler` ao seu projeto.
+Siga os seguintes passos para aplicar o componente:  
+
+**1**. Adicione o pacote `NuGet StackSpot.ErrorHandler` ao seu projeto.
 
 ```
 dotnet add package StackSpot.ErrorHandler
 ```
 
-#### 2. Adicione ao seu `IApplicationBuilder` no `Startup` da aplicação ou `Program`. 
+**2.** Adicione ao seu `IApplicationBuilder` no `Startup` da aplicação ou `Program`.
 
 ```csharp
 app.UseErrorHandler();
 ```
 
-#### Implementação
+### Implementação
 
 #### Exceções tratadas
 
-- Utilizando `HttpResponseException` - existe a possibilidade de personalizar a mensagem, bem como definir um `HttpStatusCode`. Além do retorno padronizado da api, existe a opção de gravar o log dos erros que estão ocorrendo, através da propriedade `logActive`, caso o valor seja igual a `false`, o log não é gravado.
-- O `HttpResponseException` possui diversas sobrecargas, sendo possível atribuir valor as propriedades abaixo:
+- Utilizando o `HttpResponseException`, existe a possibilidade de personalizar a mensagem, bem como definir um `HttpStatusCode`.  
+Além do retorno padronizado da API, também existe a possibilidade de gravar o log dos erros que estão ocorrendo, através da propriedade `logActive`, caso o valor seja igual a `false`, o log não é gravado.  
+- O `HttpResponseException` possui diversas sobrecargas, sendo possível atribuir valor nas propriedades abaixo:  
 
 | **Campo** | **Descrição** |
 | :--- | :--- |
-| logActive | Campo que permite ativar a gravação de log |
-| statusCode | `HttpStatusCode` que será retornado na requisição |
-| logLevel | Level do log |
-| message | Mensagem que será retornada na requisição |
-| exception | Exceção a ser gravada |
+| `logActive` | Campo que permite ativar a gravação de log |
+| `statusCode` | `HttpStatusCode` que será retornado na requisição |
+| `logLevel` | Level do log |
+| `message` | Mensagem que será retornada na requisição |
+| `exception` | Exceção a ser gravada |
 
-Exemplos de uso: 
+**Exemplos de uso:**
 
 500 - Internal Server Error
 
@@ -80,14 +83,13 @@ Resultado:
 }
 ```
 
-- Utilizando `HttpResponseObjectException` - este tem o corpotamento similar do `HttpResponseException`, possuindo as mesmas possibilidades citadas anteriomente, só que neste caso também podemos receber um `HttpRequestMessage` e `HttpResponseMessage` como parametros.
+- Utilizando o `HttpResponseObjectException`, ele tem o comportamento similar ao `HttpResponseException`. Ele possui as mesmas possibilidades citadas anteriomente, mas neste caso também é possível receber um `HttpRequestMessage` e `HttpResponseMessage` como parâmetros.
 - O `HttpResponseException` possui diversas sobrecargas, sendo possível atribuir valor as propriedades abaixo:
 
 #### Exceções não tratadas
 
-Sempre que ocorrer uma exceção não tratada, a exceção é suprimida e o log sempre será registrado. O `HttpStatusCode` será `500 - Internal Server Error` e a Api retornará algo como o exemplo abaixo:
+Sempre que ocorrer uma exceção não tratada, a exceção é suprimida e o log sempre será registrado. O `HttpStatusCode` será "`500 - Internal Server Error`" e a API retornará algo conforme o exemplo abaixo:
 
-Resultado:
 ```json
 {
   "error_id": "62ec9afe-64ad-46cb-8df0-abfd306cb7dc",

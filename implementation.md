@@ -1,4 +1,4 @@
-Adicione ao seu `IApplicationBuilder` via `app.UseErrorHandler()` no `Startup` da aplicação ou `Program`. 
+Adicione ao seu `IApplicationBuilder`, via `app.UseErrorHandler()`, no `Startup` da aplicação ou `Program`. 
 
 ```csharp
 app.UseErrorHandler();
@@ -6,18 +6,18 @@ app.UseErrorHandler();
 
 #### Exceções tratadas
 
-- Utilizando `HttpResponseException` - existe a possibilidade de personalizar a mensagem, bem como definir um `HttpStatusCode`. Além do retorno padronizado da api, existe a opção de gravar o log dos erros que estão ocorrendo, através da propriedade `logActive`, caso o valor seja igual a `false`, o log não é gravado.
-- O `HttpResponseException` possui diversas sobrecargas, sendo possível atribuir valor as propriedades abaixo:
+- Utilizando `HttpResponseException`, existe a possibilidade de personalizar a mensagem, bem como definir um `HttpStatusCode`. Além do retorno padronizado da API, existe a possibilidade de gravar o log dos erros que estão ocorrendo, através da propriedade `logActive`. Caso o valor seja igual a `false`, o log não é gravado.
+- O `HttpResponseException` possui diversas sobrecargas, sendo possível atribuir valor nas propriedades abaixo:
 
 | **Campo** | **Descrição** |
 | :--- | :--- |
-| logActive | Campo que permite ativar a gravação de log |
-| statusCode | `HttpStatusCode` que será retornado na requisição |
-| logLevel | Level do log |
-| message | Mensagem que será retornada na requisição |
-| exception | Exceção a ser gravada |
+| `logActive` | Campo que permite ativar a gravação de log |
+| `statusCode` | `HttpStatusCode` que será retornado na requisição |
+| `logLevel` | Level do log |
+| `message` | Mensagem que será retornada na requisição |
+| `exception` | Exceção a ser gravada |
 
-Exemplos de uso: 
+**Exemplos de uso:** 
 
 500 - Internal Server Error
 
@@ -61,14 +61,13 @@ Resultado:
 }
 ```
 
-- Utilizando `HttpResponseObjectException` - este tem o corpotamento similar do `HttpResponseException`, possuindo as mesmas possibilidades citadas anteriomente, só que neste caso também podemos receber um `HttpRequestMessage` e `HttpResponseMessage` como parametros.
+- Utilizando `HttpResponseObjectException` - este tem comportamento similar ao `HttpResponseException`, contendo as mesmas possibilidades citadas anteriomente. Mas neste caso também é possível receber um `HttpRequestMessage` e `HttpResponseMessage` como parâmetros.
 - O `HttpResponseException` possui diversas sobrecargas, sendo possível atribuir valor as propriedades abaixo:
 
 #### Exceções não tratadas
 
-Sempre que ocorrer uma exceção não tratada, a exceção é suprimida e o log sempre será registrado. O `HttpStatusCode` será `500 - Internal Server Error` e a Api retornará algo como o exemplo abaixo:
+Sempre que ocorrer uma exceção não tratada, a exceção é suprimida e o log sempre será registrado. O `HttpStatusCode` será `500 - Internal Server Error` e a API retornará algo conforme o exemplo abaixo:
 
-Resultado:
 ```json
 {
   "error_id": "62ec9afe-64ad-46cb-8df0-abfd306cb7dc",
